@@ -1,0 +1,46 @@
+[package]
+name = "nats-stream-dump"
+version = "0.1.0"
+edition = "2024"
+readme = "README.md"
+description = "CLI tool for dumping raw messages from NATS JetStream streams to JSON with optional JSONPath filtering"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+async-nats = { version = "0.47", features = ["jetstream"] }
+base64 = "0.22"
+clap = { version = "4.5", default-features = false, features = [
+    "derive",
+    "std",
+    "help",
+] }
+futures = { version = "0.3.30", default-features = false }
+indicatif = "0.17"
+nuid = "0.5"
+serde = { version = "1.0.210", features = ["derive"] }
+serde_json = "1.0.128"
+serde_json_path = { version = "0.7.2", features = ["functions"] }
+serde_json_path_macros = "0.1.6"
+thiserror = { version = "2.0.18", default-features = false }
+time = { version = "0.3.29", default-features = false, features = [
+    "formatting",
+    "parsing",
+] }
+tokio = { version = "1.0", features = [
+    "rt",
+    "rt-multi-thread",
+    "macros",
+    "sync",
+] }
+tokio-stream = "0.1"
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter", "fmt"] }
+
+[dev-dependencies]
+tempfile = "3.20"
+testcontainers-modules = { version = "0.15", features = ["nats"] }
+tracing-test = "0.2.5"
+
+[[bin]]
+name = "nats-stream-dump"
+path = "src/bin/nats-stream-dump/main.rs"
